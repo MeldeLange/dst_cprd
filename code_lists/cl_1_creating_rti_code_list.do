@@ -1,8 +1,7 @@
 ************************************************************************
 
-*Creating road traffic injuries code list using Flo's scripts, 2nd attempt!
-*Date started 22/11/22
-*Date finalised
+*Creating road traffic injuries code list
+*Date 22/11/22
 *Author: Mel de Lange
 
 ************************************************************************
