@@ -4,7 +4,7 @@
 
 cd "gold_primary_care_all"
 
-*1. Write propgram that reformats all date variables
+*1. Write program that reformats all date variables
 cap prog drop date
 prog def date
 foreach k in eventdate sysdate chsdate frd crd tod deathdate uts lcd{
