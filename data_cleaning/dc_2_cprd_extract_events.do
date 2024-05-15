@@ -83,13 +83,13 @@ end
 
 
 foreach i in sleep anx cvd dep eatdis rti selfharm{	
-	extract_events med "gold_primary_care_all\Stata files" `i'
+	extract_events med "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files" `i'
 	
 
 	}
 
 foreach i in sleep anx dep{
-	extract_events prod "gold_primary_care_all\Stata files" `i'
+	extract_events prod "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files" `i'
 	}
 	
 
@@ -98,7 +98,7 @@ foreach i in sleep anx dep{
 *3. *Check eventlist files look correct
 
 
-cd "gold_primary_care_all\Stata files\tempdata"
+cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files\tempdata"
 
 *a) Check medcode event lists
 
@@ -106,6 +106,7 @@ foreach outcome in anx cvd dep eatdis rti selfharm sleep {
 	
 	use eventlist_med_`outcome'.dta, clear
 	di "`outcome'"
+	count
 	unique medcode
 	keep medcode
 	duplicates drop
@@ -114,20 +115,24 @@ foreach outcome in anx cvd dep eatdis rti selfharm sleep {
 }
 
 
-*Anxiety: Unique medcodes in event list:118. 118 matched. 4 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*CVD: Unique medcodes in event list:227. 227 matched. 7 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Depression: Unique medcodes in event list:170. 170 matched.  0 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Eating disorders: Unique medcodes in event list: 17. 17 matched. 1 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Road traffic injuries: Unique medcodes in event list: 208. 208 matched. 196 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Self harm: Unique medcodes in event list: 203. 203 matched. 67 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Sleep: Unique medcodes in event list: 62. 62 matched. 0 unmatched from using (codelist). 0 unmatched from master (eventlist).
+*Anxiety: Unique medcodes in event list:118. 118 matched. 4 unmatched from using (codelist). 0 unmatched from master (eventlist). 1,591,518 events.
+*CVD: Unique medcodes in event list:227. 227 matched. 7 unmatched from using (codelist). 0 unmatched from master (eventlist). 681,900 events.
+*Depression: Unique medcodes in event list:170. 170 matched.  0 unmatched from using (codelist). 0 unmatched from master (eventlist). 2,996,643 events.
+*Eating disorders: Unique medcodes in event list: 17. 17 matched. 1 unmatched from using (codelist). 0 unmatched from master (eventlist). 19,742 events.
+*Road traffic injuries: Unique medcodes in event list: 208. 208 matched. 196 unmatched from using (codelist). 0 unmatched from master (eventlist). 210,962 events.
+*Self harm: Unique medcodes in event list: 203. 203 matched. 67 unmatched from using (codelist). 0 unmatched from master (eventlist). 82,778 events.
+*Sleep: Unique medcodes in event list: 62. 62 matched. 0 unmatched from using (codelist). 0 unmatched from master (eventlist). 586,821 events.
+
+
+
+
 
 ***********************
 
 *b) Check prodcode event lists:
 
 
-cd "gold_primary_care_all\Stata files\tempdata"
+cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files\tempdata"
 
 foreach outcome in anx dep sleep {
 	
