@@ -83,13 +83,13 @@ end
 
 
 foreach i in sleep anx cvd dep eatdis rti selfharm{	
-	extract_events med "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files" `i'
+	extract_events med "gold_primary_care_all\Stata files" `i'
 	
 
 	}
 
 foreach i in sleep anx dep{
-	extract_events prod "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files" `i'
+	extract_events prod "gold_primary_care_all\Stata files" `i'
 	}
 	
 
@@ -98,7 +98,7 @@ foreach i in sleep anx dep{
 *3. *Check eventlist files look correct
 
 
-cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files\tempdata"
+cd "\gold_primary_care_all\Stata files\tempdata"
 
 *a) Check medcode event lists
 
@@ -132,7 +132,7 @@ foreach outcome in anx cvd dep eatdis rti selfharm sleep {
 *b) Check prodcode event lists:
 
 
-cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\gold_primary_care_all\Stata files\tempdata"
+cd "gold_primary_care_all\Stata files\tempdata"
 
 foreach outcome in anx dep sleep {
 	
