@@ -3,6 +3,7 @@
 
 //This cleans the CPRD files to get all the outcome events
 *Mel de Lange: 2.4.2024
+*Updated 15.5.2024
 
 
 *******************************************************************************************
@@ -82,7 +83,7 @@ end
 *extract_events [type (med/prod))] [directory] [outcome]
 
 
-foreach i in sleep anx cvd dep eatdis rti selfharm{	
+foreach i in sleep anx_symp anx_diag cvd dep_symp dep_diag eatdis rti selfharm{	
 	extract_events med "gold_primary_care_all\Stata files" `i'
 	
 
@@ -98,11 +99,11 @@ foreach i in sleep anx dep{
 *3. *Check eventlist files look correct
 
 
-cd "\gold_primary_care_all\Stata files\tempdata"
+cd "gold_primary_care_all\Stata files\tempdata"
 
 *a) Check medcode event lists
 
-foreach outcome in anx cvd dep eatdis rti selfharm sleep {
+foreach outcome in sleep anx_symp anx_diag cvd dep_symp dep_diag eatdis rti selfharm {
 	
 	use eventlist_med_`outcome'.dta, clear
 	di "`outcome'"
@@ -114,14 +115,17 @@ foreach outcome in anx cvd dep eatdis rti selfharm sleep {
 	count if _merge==1
 }
 
-
-*Anxiety: Unique medcodes in event list:118. 118 matched. 4 unmatched from using (codelist). 0 unmatched from master (eventlist). 1,591,518 events.
+*Sleep: Unique medcodes in event list: 62. 62 matched. 0 unmatched from using (codelist). 0 unmatched from master (eventlist). 586,821 events.
+*Anxiety symptom: Unique medcodes in event list: 83. 83 matched. 4 unmatched from using (codelist). 0 unmatched from master (eventlist). 1,469,187 events.
+*Anxiety diagnosis: Unique medcodes in event list: 35. 35 matched. 122,331 events.
 *CVD: Unique medcodes in event list:227. 227 matched. 7 unmatched from using (codelist). 0 unmatched from master (eventlist). 681,900 events.
-*Depression: Unique medcodes in event list:170. 170 matched.  0 unmatched from using (codelist). 0 unmatched from master (eventlist). 2,996,643 events.
+*Depression symptom: Unique medcodes in event list:114. 114 matched. 2,346,485.
+*Depression diagnosis: Unique medcodes in event list:56. 56 matched.  650158 events.
 *Eating disorders: Unique medcodes in event list: 17. 17 matched. 1 unmatched from using (codelist). 0 unmatched from master (eventlist). 19,742 events.
 *Road traffic injuries: Unique medcodes in event list: 208. 208 matched. 196 unmatched from using (codelist). 0 unmatched from master (eventlist). 210,962 events.
 *Self harm: Unique medcodes in event list: 203. 203 matched. 67 unmatched from using (codelist). 0 unmatched from master (eventlist). 82,778 events.
-*Sleep: Unique medcodes in event list: 62. 62 matched. 0 unmatched from using (codelist). 0 unmatched from master (eventlist). 586,821 events.
+
+
 
 
 
@@ -147,7 +151,7 @@ use eventlist_prod_`outcome'.dta, clear
 }
 
 
-*Anxiety: Unique prodcodes in event list:387. 387 matched. 146 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Depression: Unique prodcodes in event list:448. 448 matched. 232 unmatched from using (codelist). 0 unmatched from master (eventlist).
-*Sleep: Unique prodcodes in event list:239. 239 matched. 88 unmatched from using (codelist). 0 unmatched from master (eventlist).
+*Anxiety: Unique prodcodes in event list:387. 387 matched. 146 unmatched from using (codelist). 0 unmatched from master (eventlist). 1,1626,797 events.
+*Depression: Unique prodcodes in event list:448. 448 matched. 232 unmatched from using (codelist). 0 unmatched from master (eventlist). 31,236,983 events.
+*Sleep: Unique prodcodes in event list:239. 239 matched. 88 unmatched from using (codelist). 0 unmatched from master (eventlist). 10,020,474 events.
 
