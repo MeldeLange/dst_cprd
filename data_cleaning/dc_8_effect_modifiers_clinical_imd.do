@@ -112,3 +112,41 @@ tab em_imd_bin, missing
 *Save combined dataset
 save demog_imd.dta, replace
 
+*******************************************************************************************
+
+*3. Generate a date of birth variable
+***************************************
+
+
+
+*3a) Clean month of birth variable
+cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
+use demog_imd.dta, clear
+tab mob, missing
+replace mob =. if mob ==0 //set mob to missing if it is 0.
+tab mob, missing
+replace mob=7 if mob==. // set mob to July it is missing.
+tab mob, missing
+
+*Generate day of birth
+gen dayob =01 // set day of birth to 1st of the month for everyone.
+
+*Combine day of birth, month of birth & year of birth into one date of birth variable.
+generate dob = mdy(mob, dayob, yob)
+format dob %d
+list patid dayob mob yob dob in 1/10
+list patid dayob mob yob dob in -10/-1
+
+*Save dataset
+save demog_imd2.dta, replace
+
+************************************************
+
+*4. Drop variables we no longer need
+**********************************
+cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
+use demog_imd2.dta, clear
+keep patid em_gender_bin em_marital_bin em_imd_bin dob // patient id, gender, marital status, deprivation & date of birth.
+
+*Save dataset
+save demog_imd3.dta, replace
