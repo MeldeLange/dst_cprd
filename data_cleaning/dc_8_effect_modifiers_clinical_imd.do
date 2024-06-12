@@ -36,7 +36,7 @@ duplicates drop //	(in terms of all variables) (0 observations deleted)
 tab gender, missing
 *Raw data: 0=Data Not Entered. 1=Male (658088). 2=Female (917008). 3=Indeterminate (15). 4=Unknown.
 gen em_gender_bin = gender
-recode em_gender_bin (3=.) // recode so we have male, female, missing.
+recode em_gender_bin (3=.) (0=.) (4=.)  // recode so we have male, female, missing.
 label define em_gender_bin_lb 1"Male" 2"Female"
 label values em_gender_bin em_gender_bin_lb
 tab em_gender_bin, missing // Male: 658,088. Female: 917,008. Missing: 15.
