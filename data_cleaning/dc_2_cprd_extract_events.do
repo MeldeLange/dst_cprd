@@ -126,7 +126,13 @@ foreach outcome in sleep anx_symp anx_diag cvd dep_symp dep_diag eatdis rti self
 *Road traffic injuries: Unique medcodes in event list: 208. 208 matched. 196 unmatched from using (codelist). 0 unmatched from master (eventlist). 210941 events.
 *Self harm: Unique medcodes in event list: 203. 203 matched. 67 unmatched from using (codelist). 0 unmatched from master (eventlist). 82773 events.
 
-
+*Compare to number of codes in codelists:
+cd "projectnumber"
+foreach outcome in sleep anx_symp anx_diag cvd dep_symp dep_diag eatdis rti selfharm {
+	use "code_lists/data_analysis_codelists/cprd_codelists/med_codelists/`outcome'.dta" 
+	di "`outcome'"
+	count // 62 87 35 234 114 56 18 404 270.
+}
 
 ***********************
 
@@ -152,3 +158,10 @@ use tempdata/eventlist_prod_`outcome'.dta, clear
 *Depression: Unique prodcodes in event list:448. 448 matched. 232 unmatched from using (codelist). 0 unmatched from master (eventlist). 31242958 events.
 *Sleep: Unique prodcodes in event list:239. 239 matched. 88 unmatched from using (codelist). 0 unmatched from master (eventlist). 10020173 events.
 
+*Compare to number of codes in codelists:
+cd "projectnumber"
+foreach outcome in anx dep sleep {
+	use "code_lists/data_analysis_codelists/cprd_codelists/prod_codelists/`outcome'.dta" 
+	di "`outcome'"
+	count // 533 680 327
+}
