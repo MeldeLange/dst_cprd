@@ -1,6 +1,7 @@
 *Basic clean of CPRD GOLD DST Files
 ************************************
 *Mel de Lange 14.3.24
+*Updated 13.8.24
 
 cd "gold_primary_care_all"
 
@@ -33,7 +34,7 @@ foreach i in Clinical Consultation Referral Test Therapy Patient Practice Additi
 		import delimited using "`f'", clear
 		date
 		compress
-		save "stata_`i'_`n'", replace
+		save "stata/`i'_`n'", replace
 		local n=`n'+1
 		}
 	}
@@ -42,6 +43,6 @@ foreach i in Clinical Consultation Referral Test Therapy Patient Practice Additi
 
 
 *3. Check files look ok & dates formated.
-use stata_Clinical_26, clear
+use stata/Clinical_26, clear
 describe
 browse
