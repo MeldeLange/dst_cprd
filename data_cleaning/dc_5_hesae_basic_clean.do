@@ -2,6 +2,7 @@
 ********************************************************
 
 *Mel de Lange 14.05.2024
+*Updated 14.8.2024
 
 cd "cprd_data\HES A&E"
 
@@ -18,7 +19,7 @@ list in 1/5
 keep patid aekey arrivaldate aepatgroup
 
 *Format aekey so not in scientific notation
-format aekey %12.0f
+format aekey %15.0f
 
 *Format admission date
 gen arrivaldate2 = date(arrivaldate, "DMY")
@@ -27,7 +28,7 @@ format arrivaldate2 %d
 list arrivaldate arrivaldate2 in 1/5
 drop arrivaldate
 rename arrivaldate2 arrivaldate
-replace arrivaldate=. if arrivaldate>150000 // 150,000 days after 01 Jan 1960 is 25th June 2028. // No changes made.
+replace arrivaldate=. if arrivaldate>150000 // 150,000 days after 01 Jan 1960. // No changes made.
 
 *Compress file
 compress
@@ -50,7 +51,7 @@ list in 1/5 // 7,794,842 obs
 keep patid aekey diag2
 
 *Format aekey so not in scientific notation
-format aekey %12.0f
+format aekey %15.0f
 
 
 *Compress file
