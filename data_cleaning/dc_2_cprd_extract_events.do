@@ -165,3 +165,93 @@ foreach outcome in anx dep sleep {
 	di "`outcome'"
 	count // 533 680 327
 }
+
+**************************************************************************
+
+*4. Copy all primary care eventlists from tempdate folder into primary care eventlists folder
+ssc install fs
+cd "projectnumber\tempdata"
+foreach i in eventlist{
+	fs "`i'*"
+	foreach f in `r(files)' { 
+		copy `f'  "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\"
+}
+}
+
+
+************************************************************************************
+*5. Cut down anxiety symptom, depression symptom & sleep eventlists to just those with prescription within 90 days either side of the event date.
+
+*In product eventlists rename clinical_eventdate prod_eventdate so don't have 2 variables called the same thing when merge with symptom event lists.
+cd "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists"
+foreach outcome in anx dep sleep {
+use eventlist_prod_`outcome'.dta, clear
+rename clinical_eventdate prod_eventdate
+save eventlist_prod_`outcome'.dta, replace
+}
+
+
+*Anxiety symptoms
+	use "eventlist_med_anx_symp.dta", clear
+	unique patid
+	joinby patid using "eventlist_prod_anx.dta"
+	unique patid
+	gen eligible = 0
+	replace eligible = 1 if prod_eventdate - clinical_eventdate <=90 & prod_eventdate - clinical_eventdate >= -90
+	keep if eligible == 1
+	unique patid
+	duplicates drop patid medcode clinical_eventdate, force //Need to drop obs where have same person, same clinical eventdate, but multiple prescriptions within the 180 day period
+	unique patid
+	save eventlist_med_prod_anx_symp.dta, replace
+
+**Depression symptoms
+	use "eventlist_med_dep_symp.dta", clear
+	unique patid
+	joinby patid using "eventlist_prod_dep.dta"
+	unique patid
+	gen eligible = 0
+	replace eligible = 1 if prod_eventdate - clinical_eventdate <=90 & prod_eventdate - clinical_eventdate >= -90
+	keep if eligible == 1
+	unique patid
+	duplicates drop patid medcode clinical_eventdate, force
+	unique patid
+	save eventlist_med_prod_dep_symp.dta, replace
+	
+*Sleep diagnoses/symptoms		
+	use "eventlist_med_sleep.dta", clear
+	unique patid
+	joinby patid using "eventlist_prod_sleep.dta"
+	unique patid
+	gen eligible = 0
+	replace eligible = 1 if prod_eventdate - clinical_eventdate <=90 & prod_eventdate - clinical_eventdate >= -90
+	keep if eligible == 1
+	unique patid
+	duplicates drop patid medcode clinical_eventdate, force
+	unique patid
+	save eventlist_med_prod_sleep.dta, replace
+
+****************************************************************************************************************
+*6. Append anxiety & depression symptom + prescription eventlists on to anxiety & depression diagnoses eventlists
+
+*Depression
+use eventlist_med_prod_dep_symp.dta, clear
+unique patid
+append using eventlist_med_dep_diag.dta
+unique patid
+save eventlist_dep_combined.dta, replace
+
+*Anxiety
+use eventlist_med_prod_anx_symp.dta, clear
+unique patid
+append using eventlist_med_anx_diag.dta
+unique patid
+save eventlist_anx_combined.dta, replace
+
+*************
+
+*7. Create folder with final eventlists following initial extaction process
+***************************************************************************
+
+foreach i in eventlist_dep_combined eventlist_anx_combined eventlist_med_prod_sleep eventlist_med_selfharm eventlist_med_rti eventlist_med_eatdis eventlist_med_cvd {
+		copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists/`i'.dta"  "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\extraction\", replace
+}
