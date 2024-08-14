@@ -138,7 +138,12 @@ foreach eventlist in eventlist_psy_diag2_aepatgroup eventlist_cvd_diag2_aepatgro
 *CVD 25,326 duplicates deleted. Number of unique values of patid is  362205 Number of records is  544418.
 
 
+*3d) Create folder with final eventlists following initial extaction process
+***************************************************************************
 
+foreach i in eventlist_cvd_diag2_aepatgroup eventlist_psy_diag2_aepatgroup eventlist_rti_aepatgroup eventlist_selfharm_aepatgroup {
+		copy "projectnumber\cprd_data\HES A&E/`i'.dta"  "projectnumber\cprd_data\HES A&E/extraction\", replace
+}
 
 
 
