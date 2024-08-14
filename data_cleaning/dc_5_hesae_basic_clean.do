@@ -11,7 +11,7 @@ cd "cprd_data\HES A&E"
 **************************
 
 import delimited using hesae_attendance_22_002468_DM.txt, clear
-browse // 9,222,737 obs.
+browse // 9,112,011 obs.
 list in 1/5
 
 
@@ -44,7 +44,7 @@ save hes_ae_attendance.dta, replace
 
 import delimited using hesae_diagnosis_22_002468_DM.txt, clear
 browse
-list in 1/5 // 7,794,842 obs
+list in 1/5 // 7,697,067 obs
 
 
 *Only keep variables we need.
