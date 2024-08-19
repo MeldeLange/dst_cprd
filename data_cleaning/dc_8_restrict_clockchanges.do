@@ -56,7 +56,7 @@ save "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\clockchange
 ***********************
 
 *Save start_end_clockchanges dataset in HES APC folder
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\registration/start_end_clockchanges2.dta" "\\projectnumber\cprd_data\HES APC data\"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\registration/start_end_clockchanges2.dta" "projectnumber\cprd_data\HES APC data\"
 
 *Loop to merge clock change dates with eventlists & cut down to events within 28 days
 cd "projectnumber\cprd_data\HES APC data\"
@@ -70,6 +70,7 @@ unique patid
 joinby patid using "`f'" // match clock changes & event list
 unique patid
 order patid icd admidate
+drop cc27_spring_2021 cc28_autumn_2021 cc29_spring_2022 cc30_autumn_2022
 gen eligible = 0
 foreach var of varlist cc*{
 replace eligible =1 if admidate - `var' <= 28 & admidate -`var' >= -28 // only eligible if event is within 28 days either side of clock change
@@ -80,13 +81,14 @@ drop eligible
 save "projectnumber\cprd_data\HES APC data\clockchanges/clock_`f'", replace
 }
 
-*Anx: unique patid 205,949, records  439,198. (307,340 observations deleted) unique patid 85,700, records 131,858.
-*CVD: unique patid 427,075, records 1,563,420. (1,141,681 observations deleted).  unique patid  201,342, records  421,739.
-*Dep: unique patid 276,666, records is  699,580. (497,811 observations deleted). unique patid 123,784, records 201,769
-*Eatdis: unique patid 5,923, records 15943.(11,670 observations deleted) unique  patid  2,335, records 4273.
-*RTI: unique patid 41,565,  records 44329. (34,436 observations deleted) unique patid 9,643, records 9893.
-*Selfharm: unique patid 288, records 498. (371 observations deleted) unique patid is 93, 127 records.
-*Sleep:unique patid 12,401, records 16558. (12,211 observations deleted) unique patid 3,687, records 4347.
+*Anx: unique patid 205,949, records  439,198. (313,633 observations deleted) unique patid  82,203, records  125,565.
+*CVD: unique patid 427,075, records 1,563,420. (1,148,001 observations deleted).  unique patid  198143, records  415419.
+*Dep: unique patid 276,666, records is  699,580. (504,521 observations deleted). unique patid 120317, records 195059.
+*Eatdis: unique patid 5,923, records 15943.(11,851 observations deleted) unique  patid  2236, records 4092.
+*RTI: unique patid 41,565,  records 44329. (34,537 observations deleted) unique patid 9546, records 9792.
+*Selfharm: unique patid 288, records 498. (373 observations deleted) unique patid is 92, 125records.
+*Sleep:unique patid 12,401, records 16558. (12,359 observations deleted) unique patid 3562, records 4199.
+
 
 *Check no duplictes of same person with same code on same date.
 cd "projectnumber\cprd_data\HES APC data\clockchanges"
@@ -104,7 +106,7 @@ foreach f in `r(files)' {
 *************************************************************
 
 *Save start_end_clockchanges dataset in HES A&E extraction folder
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\registration/start_end_clockchanges2.dta" "\\projectnumber\cprd_data\HES A&E\extraction\"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\registration/start_end_clockchanges2.dta" "projectnumber\cprd_data\HES A&E\extraction\"
 
 *Raw eventlist files we have are:
 *eventlist_rti_aepatgroup
@@ -125,6 +127,7 @@ unique patid
 joinby patid using "`f'" // match clock changes & event list
 unique patid
 order patid aekey arrivaldate
+drop cc25_spring_2020 cc26_autumn_2020 cc27_spring_2021 cc28_autumn_2021 cc29_spring_2022 cc30_autumn_2022
 gen eligible = 0
 foreach var of varlist cc*{
 replace eligible =1 if arrivaldate - `var' <= 28 & arrivaldate -`var' >= -28 // only eligible if event is within 28 days either side of clock change
@@ -136,10 +139,10 @@ save "projectnumber\cprd_data\HES A&E\clockchanges/clock_`f'", replace
 }
 
 
-*CVD: unique patid 362,205, records 544418. (375,299 observations deleted) unique patid 139,061, records 169119.
-*Psy: unique patid 85,724, records 138815. (96,128 observations deleted) unique patid 32,559, records 42687.
-*RTI: unique patid 161,033,records  181223. (126,031 observations deleted) unique patid 52,295, records is 55192.
-*Selfharm: unique patid 64,761, records 114346. (80,034 observations deleted) unique patid 24,383, records 34312.
+*CVD: unique patid 362,205, records 544418. (379,427  observations deleted) unique patid 135782, records 164991.
+*Psy: unique patid 85,724, records 138815. (97,471 observations deleted) unique patid 31507, records 41344.
+*RTI: unique patid 161,033,records  181223. (126,056 observations deleted) unique patid 52270, records is 55167.
+*Selfharm: unique patid 64,761, records 114346. (80,498 observations deleted) unique patid 24051, records 33848.
 
 
 *Check for duplicates
