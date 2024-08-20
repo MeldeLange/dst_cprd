@@ -1,4 +1,4 @@
-*Create effect modifiers from clinical & deprivation files
+*Create effect modifiers from patient & deprivation files
 ***********************************************************
 
 
@@ -8,26 +8,27 @@
 
 *1a) Loop to open the 5 patient files, save patid, current registration date & transfer out date.
 clear
-cd "cprd_data\gold_primary_care_all\Stata files"
+cd "projectnumber\cprd_data\gold_primary_care_all\stata"
 ssc install fs
 fs "*Patient*"
 foreach f in `r(files)' {
 	use "`f'", clear
 	keep patid yob mob gender marital // keep patient id, year of birth, month of birth, gender & martial status
-	save "tempdata/demog_`f'", replace
+	save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\effect_modifiers\patient/`f'", replace
 			}
 
 *1b) Loop to append the 5 temporary spine files.
 clear
-cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
-fs "*demog*"
+cd "projectnumber\effect_modifiers\patient"
+fs "*patient*"
 foreach f in `r(files)' {
 	di "`f'"
 	append using "`f'"
 	rm "`f'"
-}
+} // obs: 1,474,651
 
-duplicates drop //	(in terms of all variables) (0 observations deleted)
+
+duplicates drop //	(in terms of all variables) 0 duplicates.
 
 
 *1c) Clean variables
@@ -36,10 +37,10 @@ duplicates drop //	(in terms of all variables) (0 observations deleted)
 tab gender, missing
 *Raw data: 0=Data Not Entered. 1=Male (658088). 2=Female (917008). 3=Indeterminate (15). 4=Unknown.
 gen em_gender_bin = gender
-recode em_gender_bin (3=.) (0=.) (4=.)  // recode so we have male, female, missing.
+recode em_gender_bin (3=.) (0=.) (4=.) // recode so we have male, female, missing.
 label define em_gender_bin_lb 1"Male" 2"Female"
 label values em_gender_bin em_gender_bin_lb
-tab em_gender_bin, missing // Male: 658,088. Female: 917,008. Missing: 15.
+tab em_gender_bin, missing // Male:  657,930. Female:816,705. Missing:16.
 
 
 *Marital status
@@ -49,10 +50,10 @@ gen em_marital_bin = marital
 recode  em_marital_bin (0=.) (1=2) (2=1) (3=2) (4=2) (5=2) (6=.) (7=1) (8=1) (9=1) (10=1) (11=1) // Recode to in relationship/rest/missing.
 label define em_marital_bin_lb 1"In relationship" 2"Not in relationship"
 label values em_marital_bin em_marital_bin_lb
-tab em_marital_bin, missing // In r'ship: 176,212. Not in r'ship: 117,750. *Missing: 1,181,149.* We are missing marital status for 80% of our sample!
+tab em_marital_bin, missing // In r'ship: 176,143. Not in r'ship: 117,727 . *Missing:1,180,781 .* We are missing marital status for 80% of the source sample.
 
-*Save demographic effect modifiers file
-save demog.dta, replace
+*Save patient effect modifiers file
+save patient.dta, replace
 
 ********************************************************
 
@@ -60,44 +61,31 @@ save demog.dta, replace
 
 *2a) Save deprivation data
 
-cd "cprd_data\Deprivation"
+cd "projectnumber\effect_modifiers\deprivation"
 
 *Open IMD file
 import delimited patient_2019_imd_22_002468.txt, clear
 
 *Explore file
 ssc install unique
-unique patid // 1490,984 - not sure why we have this many people? 
-unique pracid // 391
+unique patid // 1474651
+unique pracid //391
 
 *Format patid so not in scientific notation
-format patid %12.0f
+format patid %15.0f
 
 *Save deprivation file as stata file
-cd "cprd_data\gold_primary_care_all\Stata files"
-save stata_imd.dta, replace
-cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
-save stata_imd.dta, replace
+save imd.dta, replace
 
 
 *2b) Merge deprivation file with demographic effect modifiers based on patid.
-cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
-use demog.dta, clear
-merge 1:1 patid using stata_imd.dta
-drop if _merge ==2
+cd "projectnumber"
+use "effect_modifiers\patient/patient.dta", clear
+merge 1:1 patid using "effect_modifiers\deprivation\imd.dta" // all matched.
 drop _merge
-*Result                      Number of obs
-*    -----------------------------------------
-*    Not matched                        15,881
-*        from master                         4  (_merge==1)
-*        from using                     15,877  (_merge==2)
 
-*    Matched                         1,475,107  (_merge==3)
-*    -----------------------------------------
 
-** 4 people in our sample weren't in the IMD dataset.
-
-*rename imd variable
+*2c) Rename imd variable
 rename e2019_imd_20 em_imd
 
 *Recode imd variable to binary var of most deprived 20% vs rest. (Raw data:1-20. 1=least deprived. 20=most deprived)
@@ -109,44 +97,83 @@ label values em_imd_bin em_imd_bin_lb
 tab em_imd_bin, missing
 
 
-*Save combined dataset
-save demog_imd.dta, replace
+*2d) Save combined dataset
+save "effect_modifiers\patient\patient_imd.dta", replace
+
 
 *******************************************************************************************
 
 *3. Generate a date of birth variable
 ***************************************
 
-
-
-*3a) Clean month of birth variable
-cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
-use demog_imd.dta, clear
+*a) Clean month of birth variable
+cd "projectnumber\effect_modifiers\patient\"
+use patient_imd.dta, clear
 tab mob, missing
 replace mob =. if mob ==0 //set mob to missing if it is 0.
 tab mob, missing
-replace mob=7 if mob==. // set mob to July it is missing.
+replace mob=7 if mob==. // set mob to July if it is missing.
 tab mob, missing
 
-*Generate day of birth
+*b)Generate day of birth
 gen dayob =01 // set day of birth to 1st of the month for everyone.
 
-*Combine day of birth, month of birth & year of birth into one date of birth variable.
+*c) Combine day of birth, month of birth & year of birth into one date of birth variable.
 generate dob = mdy(mob, dayob, yob)
 format dob %d
 list patid dayob mob yob dob in 1/10
 list patid dayob mob yob dob in -10/-1
 
-*Save dataset
-save demog_imd2.dta, replace
+*d) Drop variables we no longer need
+keep patid em_gender_bin em_marital_bin em_imd_bin dob // patient id, gender, marital status, deprivation & date of birth
 
-************************************************
+*e)Save dataset
+save patient_imd2.dta, replace
 
-*4. Drop variables we no longer need
-**********************************
-cd "cprd_data\gold_primary_care_all\Stata files\tempdata"
-use demog_imd2.dta, clear
-keep patid em_gender_bin em_marital_bin em_imd_bin dob // patient id, gender, marital status, deprivation & date of birth.
 
-*Save dataset
-save demog_imd3.dta, replace
+
+*****************************************
+
+*4. Merge patient & deprivation dataset with eventlists
+*********************************************************
+
+*a)Primary care data
+clear
+cd "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\valid_gp"
+ssc install fs
+fs "*eventlist*"
+foreach f in `r(files)' {
+use `f', clear
+merge m:1 patid using "projectnumber\effect_modifiers\patient/patient_imd2.dta"
+keep if _merge ==3
+drop _merge
+save "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age/patient_`f'", replace
+}
+
+
+*b) HES APC
+clear
+cd "projectnumber\cprd_data\HES APC data\clockchanges"
+ssc install fs
+fs "*eventlist*"
+foreach f in `r(files)' {
+use `f', clear
+merge m:1 patid using "projectnumber\effect_modifiers\patient/patient_imd2.dta"
+keep if _merge ==3
+drop _merge
+save "projectnumber\cprd_data\HES APC data\age/patient_`f'", replace
+}
+
+
+*c) HES A&E
+clear
+cd "projectnumber\cprd_data\HES A&E\clockchanges"
+ssc install fs
+fs "*eventlist*"
+foreach f in `r(files)' {
+use `f', clear
+merge m:1 patid using "projectnumber\effect_modifiers\patient/patient_imd2.dta"
+keep if _merge ==3
+drop _merge
+save "projectnumber\cprd_data\HES A&E\age/patient_`f'", replace
+}
