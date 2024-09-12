@@ -140,19 +140,19 @@ copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_pat
 copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_dep_combined.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_dep.dta"
 
 *CVD
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_cvd.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\primary_care\pc_cvd.dta"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_cvd.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_cvd.dta"
 
 *Eatdis
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_eatdis.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\primary_care\pc_eatdis.dta"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_eatdis.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_eatdis.dta"
 
 *Sleep
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_prod_sleep.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\primary_care\pc_sleep.dta"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_prod_sleep.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_sleep.dta"
 
 *Selfharm
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_selfharm.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\primary_care\pc_selfharm.dta"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\age_patient_validgp_clock_eventlist_med_selfharm.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_selfharm.dta"
 
 *RTIs
-copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\patient_validgp_clock_eventlist_med_rti.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\primary_care\pc_rti.dta"
+copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\patient_validgp_clock_eventlist_med_rti.dta" "projectnumber\cprd_data\final_eventlists\primary_care\pc_rti.dta"
 
 ****************************************
 
@@ -160,25 +160,25 @@ copy "projectnumber\cprd_data\gold_primary_care_all\stata\eventlists\age\patient
 ********************************
 
 *Anxiety
-copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_anx.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_anx.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_anx.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_anx.dta"
 
 *Depression
-copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_dep.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_dep.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_dep.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_dep.dta"
 
 *CVD
-copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_cvd.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_cvd.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_cvd.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_cvd.dta"
 
 *eatdis
-copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_eatdis.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_eatdis.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_eatdis.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_eatdis.dta"
 
 *seflharm
-copy "projectnumber\22_002468\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_selfharm.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_selfharm.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_selfharm.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_selfharm.dta"
 
 *sleep
-copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_sleep.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_sleep.dta"
+copy "projectnumber\cprd_data\HES APC data\age\age_patient_clock_eventlist_icd10_sleep.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_sleep.dta"
 
 *RTIs
-copy "projectnumber\cprd_data\HES APC data\age\patient_clock_eventlist_icd10_rti.dta" "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\final_eventlists\hes_apc\hesapc_rti.dta"
+copy "projectnumber\cprd_data\HES APC data\age\patient_clock_eventlist_icd10_rti.dta" "projectnumber\cprd_data\final_eventlists\hes_apc\hesapc_rti.dta"
 
 
 ****************************************************************
