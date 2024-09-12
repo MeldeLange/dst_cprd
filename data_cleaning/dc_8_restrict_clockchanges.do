@@ -4,6 +4,12 @@
 *Restrict outcome eventlists to just those events within 28 days (4 weeks) either side of the clock changes.
 ******************************************************************************************************
 
+*NB
+*Primary care data: We are looking at the 4 weeks before & after the Spring & Autumn clock changes between 2008-2022 (30 clock changes). 
+*However, HES APC data only goes up to March 2021 (so we can't use any 2021 data as we don' t have the full period over the Spring clock change) and HES A&E data only goes up to March 2020 (se we can't use 2020 data).
+*So: HES APC study period: 2008-2020 (26 clock changes).
+*HES A&E study period: 2008-2019 (24 clock changes).
+
 *1. Primary care data
 **********************
 
