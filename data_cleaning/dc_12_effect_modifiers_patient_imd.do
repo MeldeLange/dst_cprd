@@ -14,7 +14,7 @@ fs "*Patient*"
 foreach f in `r(files)' {
 	use "`f'", clear
 	keep patid yob mob gender marital // keep patient id, year of birth, month of birth, gender & martial status
-	save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\effect_modifiers\patient/`f'", replace
+	save "projectnumber\effect_modifiers\patient/`f'", replace
 			}
 
 *1b) Loop to append the 5 temporary spine files.
