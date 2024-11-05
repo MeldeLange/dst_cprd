@@ -3,7 +3,7 @@
 *Mel de Lange 14.3.24
 *Updated 13.8.24
 
-cd "gold_primary_care_all"
+cd "projectnumber\cprd_data\gold_primary_care_all"
 
 *1. Write program that reformats all date variables
 cap prog drop date
