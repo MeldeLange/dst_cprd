@@ -8,7 +8,7 @@
 
 *Loop to cut eventlists down to events within 28 days of the clock changes
 ssc install unique
-cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\combined\combined_eventlists"
+cd "projectnumber\cprd_data\combined\combined_eventlists"
 foreach outcome in anx cvd dep eatdis psy rti selfharm sleep{
 use eventlist_`outcome'_15.dta, clear
 unique patid
@@ -24,7 +24,7 @@ drop eligible
 tab em_year, missing // check we've only got 2008-2019
 tab em_season, missing // check no missing values
 tab month, missing // check correct months.
-save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\combined\combined_eventlists/eventlist_`outcome'_16.dta", replace
+save "projectnumber\cprd_data\combined\combined_eventlists/eventlist_`outcome'_16.dta", replace
 }
 
 
@@ -32,17 +32,17 @@ save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\
 *****************************
 
 *2a) Loop through eventlists & create list of unique patient ids.
-cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\combined\combined_eventlists"
+cd "projectnumber\cprd_data\combined\combined_eventlists"
 foreach outcome in anx cvd dep eatdis psy rti selfharm sleep{
 use eventlist_`outcome'_16.dta, clear
 keep patid
 duplicates drop
-save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\combined\participant_flow/clockchanges/flow_`outcome'", replace
+save "projectnumber\cprd_data\combined\participant_flow/clockchanges/flow_`outcome'", replace
 }
 
 *2b) Append files into one dataset
 clear
-cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\cprd_data\combined\participant_flow\clockchanges"
+cd "projectnumber\cprd_data\combined\participant_flow\clockchanges"
 local filenames : dir . files "*"
 foreach file of local filenames { 
       di "`file'"
