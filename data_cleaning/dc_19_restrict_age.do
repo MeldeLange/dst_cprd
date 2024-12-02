@@ -61,15 +61,16 @@ use "eventlist_`outcome'_18.dta", clear
 count
 }
 
-*Anxiety: 200,048
-*CVD: 607,295
-*Depression: 529,393
-*Eating disorders: 5,534
-*Psychological conditions (in A&E only): 41,081
-*Road traffic injuries: 88,540
-*Selfharm: 41,648
-*Sleep: 64,025
 
+
+*Anxiety:198,939
+*CVD:600,298
+*Depression:527,500
+*Eating disorders:5,489
+*Psychological conditions (in A&E only):40,341
+*Road traffic injuries:87,560
+*Selfharm:40,915
+*Sleep:63,990
 
 
  
