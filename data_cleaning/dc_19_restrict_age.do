@@ -48,7 +48,7 @@ foreach file of local filenames {
 	  append using "`file'"
 }
 
-duplicates drop // 687,360
+duplicates drop // 683809
 count
 save flow_age.dta, replace
 
@@ -73,4 +73,19 @@ count
 *Sleep:63,990
 
 
- 
+
+*4. Loop through final flow datasets to count how many people we have per outcome.
+cd "projectnumber\cprd_data\combined\participant_flow\age"
+foreach outcome in anx cvd dep eatdis psy rti selfharm sleep{
+use "flow_`outcome'.dta", clear
+count
+}
+
+*Anx: 121,151
+*CVD: 260,274
+*Dep: 293,109
+*Eatdis: 3,110
+*Psy: 30,791
+*RTI:73,745
+*Self harm: 27,752
+*Sleep: 48,753
