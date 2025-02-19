@@ -11,7 +11,7 @@
 **********
 clear
 foreach mod in incident{
-	cd "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\stratified\datasets/`mod'/years_combined"
+	cd "projectnumber\analysis\stratified\datasets/`mod'/years_combined"
 
 foreach outcome in anx cvd dep eatdis psy selfharm sleep{
 		foreach category in 0 1 2 3{
