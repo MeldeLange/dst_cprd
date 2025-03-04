@@ -245,7 +245,8 @@ ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) /// 
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
 addplot(scatter x gap, mlabel(events) msymbol(none) mlabpos(0) mlabsize(vsmall)) ///
-name(panelA)
+name(panelA) ///
+title(Spring)
 
 *************************************
 
@@ -286,7 +287,8 @@ ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) /// 
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
 addplot(scatter x gap, mlabel(events) msymbol(none) mlabpos(0) mlabsize(vsmall)) ///
-name(panelB)
+name(panelB) ///
+title(Autumn)
 
 ******************************
 
