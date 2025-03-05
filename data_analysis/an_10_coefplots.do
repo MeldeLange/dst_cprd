@@ -246,7 +246,8 @@ xlabel(, nogrid labsize(vsmall)) ///
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
 addplot(scatter x gap, mlabel(events) msymbol(none) mlabpos(0) mlabsize(vsmall)) ///
 name(panelA) ///
-title(Spring)
+title ("{bf:Spring}", size(vsmall)) ///
+scheme (s2mono)
 
 *************************************
 
@@ -288,7 +289,8 @@ xlabel(, nogrid labsize(vsmall)) ///
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
 addplot(scatter x gap, mlabel(events) msymbol(none) mlabpos(0) mlabsize(vsmall)) ///
 name(panelB) ///
-title(Autumn)
+title ("{bf:Autumn}", size(vsmall)) ///
+scheme (s2mono)
 
 ******************************
 
