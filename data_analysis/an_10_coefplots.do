@@ -298,10 +298,10 @@ scheme (s2mono)
 
 //graph combine panelA panelB, ycommon iscale(1) ///
 //note(Numbers represent the total number of events per outcome in the week after DST transition and control weeks, size(vsmall))
-//graph save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot\graphs\combined/combined_horiz", replace
-//graph export "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot\graphs\combined/combined_horiz.wmf", replace
-//graph export "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot\graphs\combined/combined_horiz.pdf", as(pdf) replace 
-//graph export "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot\graphs\combined/combined_horiz.eps", replace
+//graph save "projectnumber\analysis\coefplot\graphs\combined/combined_horiz", replace
+//graph export "projectnumber\analysis\coefplot\graphs\combined/combined_horiz.wmf", replace
+//graph export "projectnumber\analysis\coefplot\graphs\combined/combined_horiz.pdf", as(pdf) replace 
+//graph export "projectnumber\analysis\coefplot\graphs\combined/combined_horiz.eps", replace
 
 *3c) Combine the two graphs vertically
 graph combine panelA panelB, col(1) ycommon ysize(8) ///
