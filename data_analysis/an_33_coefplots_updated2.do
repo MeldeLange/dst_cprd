@@ -29,7 +29,7 @@ rename uci1 uci
 rename lci1 lci
 gen outcome = "`outcome'"
 order outcome irr lci uci
-save "projectnumber\analysis\coefplot/final/autumn_`outcome'.dta", replace
+save "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot/final/autumn_`outcome'.dta", replace
 }
 
 *Append the separate outcome datasets together.
@@ -50,7 +50,7 @@ foreach f in `r(files)' {
 cd "projectnumber\analysis\coefplot\final"
 use autumn.dta, clear
 mkmat irr lci uci , matrix(autumn)
-matrix rownames autumn= "Anxiety" "Acute CVD" "Depression" "Eating Disorders" "Psychiatric Conditions" "Road Traffic Injuries" "Self-Harm" "Sleep Disorders"
+matrix rownames autumn= "Anxiety" "Acute CVD" "Depression" "Eating Disorders" "Psychiatric Conditions in A&E" "Road Traffic Injuries" "Self-Harm" "Sleep Disorders"
 matrix colnames autumn = irr lci uci
 matrix list autumn
 matrix autumn=autumn'
@@ -82,7 +82,7 @@ ciopts(lc(midblue) lwidth(medium)) ///
 ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) ///
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
-note("Adjusted for day of the week and region. Control period: 4 weeks before & weeks 2-4 after the clock change", height(6) size(vsmall)) ///
+note("Rate ratio = relative change in the mean number of events per day (per year, per region) in the week after the clock change compared to the control period." "Control period = 4 weeks before the clock change + weeks 2-4 after the clock change." "Adjusted for day of the week & region. CVD = cardiovascular disease. A&E = accident & emergency.", height(6) size(tiny)) ///
 addplot(scatter x gap, mlabel(info) msymbol(none) mlabpos(0) mlabsize(vsmall) mlabcol(black))
 graph save "projectnumber\analysis\coefplot\final\graphs\colour_separate/autumn", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\colour_separate/autumn.wmf", replace
@@ -104,7 +104,7 @@ ciopts(lc(black) lwidth(medium)) ///
 ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) /// 
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
-note("Adjusted for day of the week and region. Control period: 4 weeks before & weeks 2-4 after the clock change", height(6) size(vsmall)) ///
+note("Rate ratio = relative change in the mean number of events per day (per year, per region) in the week after the clock change compared to the control period." "Control period = 4 weeks before the clock change + weeks 2-4 after the clock change." "Adjusted for day of the week & region. CVD = cardiovascular disease. A&E = accident & emergency.", height(6) size(tiny)) ///
 addplot(scatter x gap, mlabel(info) msymbol(none) mlabpos(0) mlabsize(vsmall) mlabcol(black)) 
 graph save "projectnumber\analysis\coefplot\final\graphs\bw_separate/autumn", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\bw_separate/autumn.wmf", replace
@@ -159,7 +159,7 @@ foreach f in `r(files)' {
 cd "projectnumber\analysis\coefplot\final"
 use spring.dta, clear
 mkmat irr lci uci , matrix(spring)
-matrix rownames spring= "Anxiety" "Acute CVD" "Depression" "Eating Disorders" "Psychiatric Conditions" "Road Traffic Injuries" "Self-Harm" "Sleep Disorders"
+matrix rownames spring= "Anxiety" "Acute CVD" "Depression" "Eating Disorders" "Psychiatric Conditions in A&E" "Road Traffic Injuries" "Self-Harm" "Sleep Disorders"
 matrix colnames spring = irr lci uci
 matrix list spring
 matrix spring=spring'
@@ -191,7 +191,7 @@ ciopts(lc(midblue) lwidth(medium)) ///
 ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) ///
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
-note("Adjusted for day of the week, region & 5-day Easter weekend. Control period: 4 weeks before & weeks 2-4 after the clock change", height(6) size(vsmall)) ///
+note("Rate ratio = relative change in the mean number of events per day (per year, per region) in the week after the clock change compared to the control period." "Control period = 4 weeks before the clock change + weeks 2-4 after the clock change." "Adjusted for day of the week, region & 5-day Easter weekend. CVD = cardiovascular disease. A&E = accident & emergency.", height(6) size(tiny)) ///
 addplot(scatter x gap, mlabel(info) msymbol(none) mlabpos(0) mlabsize(vsmall) mlabcol(black))
 graph save "projectnumber\analysis\coefplot\final\graphs\colour_separate/spring", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\colour_separate/spring.wmf", replace
@@ -212,7 +212,7 @@ ciopts(lc(black) lwidth(medium)) ///
 ylabel(, nogrid labsize(vsmall)) ///
 xlabel(, nogrid labsize(vsmall)) /// 
 xtitle("Incidence Rate Ratio (95% CI)", height(3) size(vsmall)) ///
-note("Adjusted for day of the week, region & 5-day Easter weekend. Control period: 4 weeks before & weeks 2-4 after the clock change", height(6) size(vsmall)) ///
+note("Rate ratio = relative change in the mean number of events per day (per year, per region) in the week after the clock change compared to the control period." "Control period = 4 weeks before the clock change + weeks 2-4 after the clock change." "Adjusted for day of the week, region & 5-day Easter weekend. CVD = cardiovascular disease. A&E = accident & emergency.", height(6) size(tiny)) ///
 addplot(scatter x gap, mlabel(info) msymbol(none) mlabpos(0) mlabsize(vsmall) mlabcol(black)) 
 graph save "projectnumber\analysis\coefplot\final\graphs\bw_separate/spring", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\bw_separate/spring.wmf", replace
