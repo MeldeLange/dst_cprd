@@ -322,4 +322,4 @@ size(tiny))
 graph save "projectnumber\analysis\coefplot\final\graphs\combined/combined2", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\combined/combined2.wmf", replace
 graph export "projectnumber\analysis\coefplot\final\graphs\combined/combined2.pdf", as(pdf) replace 
-graph export "\\ads.bris.ac.uk\filestore\HealthSci SafeHaven\CPRD Projects UOB\Projects\22_002468\analysis\coefplot\final\graphs\combined/combined2.eps", replace
+graph export "projectnumber\analysis\coefplot\final\graphs\combined/combined2.eps", replace
